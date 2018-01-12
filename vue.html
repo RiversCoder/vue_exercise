@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+	</style>
+
+</head>
+<body>
+
+
+	<div id="app">
+
+		<p v-once>{{message}}</p>
+		<p>{{message}}</p>
+		<p v-if="show">显示出来</p>
+		<p v-if="hidden">不显示出来</p>
+		<p v-if="num >= 3.2">数字大于等于3.2</p>
+		<p v-else>数字小于3.2</p>
+		<input type="text" name="" v-model="message" />
+
+		<p>你输入的成绩对应的等级:</p>
+		<p v-if="score >= 90">优秀</p>
+		<p v-else-if="score >= 75">良好</p>
+		<p v-else-if="score >= 60">及格</p>
+		<p v-else>不及格</p>
+		<input type="text" name="" v-model='score'>
+
+		<p>您的动物列表:</p>
+		<p v-for="(item,index) in animals">
+			{{item}}
+		</p>
+
+		
+		
+	</div>
+
+	
+	<script type="text/javascript" src="js/vue.js"></script>	
+	<script type="text/javascript">
+		let vm = new Vue({
+			el: '#app',
+			data: {
+				message : '你好 world',
+				show : true,
+				hidden : false,
+				num : 3.2,
+				score : 88,
+				lists : [88,80,90,99,102,36],
+				animals:[{name:'猫',age:3},{name:'狗',age:3},{name:'哈士奇',age:2}]
+			}
+		});
+	</script>
+
+
+	<script type="text/javascript">		
+		/*
+			vue指令: 
+			v-model -> 数据绑定，时刻更新数据 
+			v-once  -> 单次绑定数据，不时刻更新刷新
+			v-if    -> 根据表达式( boolean )的真假来添加和删除元素 真实的条件渲染 把元素替换成 <!---->
+			v-show  -> 条件选择类似于v-if 但只是css的一个样式隐藏 给元素添加了display:none
+			v-else  -> 不能单独使用,前面紧挨着必须是 v-if 或者 v-else-if
+			v-for   -> 批量渲染列表数据 语法 v-for= "(item,index) in items "其级别高于v-if等条件语句
+		*/
+	</script>
+	<!--
+		
+	-->
+	
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "vue_layout",
+  "version": "1.0.0",
+  "description": "vue",
+  "main": "app/index.js",
+  "dependencies": {
+    "_vue@2.5.13@vue": "^2.5.13",
+    "vue": "^2.5.13"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "1"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "author": "rivers",
+  "license": "ISC"
+}
