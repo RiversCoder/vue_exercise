@@ -33,7 +33,25 @@
 			{{item}}
 		</p>
 
-		
+		<p>你们的成绩：</p>
+		<table border="1" cellpadding="0" cellspacing="0" align="center">
+			<tr>
+				<th>编号</th>
+				<th>姓名</th>
+				<th>科目</th>
+				<th>成绩</th>
+			</tr>
+			<tr v-for="item in subjects">
+				<td>{{item.id}}</td>
+				<td>{{item.name}}</td>
+				<td>{{item.cate}}</td>
+				<td>{{item.score}}</td>
+			</tr>
+		</table>
+
+		<p>图片属性：</p>
+		<img :src="imgSrc" alt="" width="200">
+
 		
 	</div>
 
@@ -49,7 +67,14 @@
 				num : 3.2,
 				score : 88,
 				lists : [88,80,90,99,102,36],
-				animals:[{name:'猫',age:3},{name:'狗',age:3},{name:'哈士奇',age:2}]
+				animals:[{name:'猫',age:3},{name:'狗',age:3},{name:'哈士奇',age:2}],
+				subjects:[
+						{id:1,name:'王小明',cate:'数学',score:'86'},
+						{id:1,name:'李宝',cate:'语文',score:'96'},
+						{id:1,name:'胡大华',cate:'英语',score:'79'},
+						{id:1,name:'小花',cate:'物理',score:'91'}
+					],
+				imgSrc:'./images/timg.jpg'	
 			}
 		});
 	</script>
@@ -64,6 +89,10 @@
 			v-show  -> 条件选择类似于v-if 但只是css的一个样式隐藏 给元素添加了display:none
 			v-else  -> 不能单独使用,前面紧挨着必须是 v-if 或者 v-else-if
 			v-for   -> 批量渲染列表数据 语法 v-for= "(item,index) in items "其级别高于v-if等条件语句
+			v-text  -> 往标签内部动态的注入text内容
+			v-html  -> 往标签内部动态的注入html内容
+			v-bind  -> 给标签动态的绑定属性 src alt data-x  ... ; 绑定一个类
+
 		*/
 	</script>
 	<!--

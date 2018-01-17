@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		.formbox{padding: 30px;border:2px solid #ddd;border-radius:6px;}
+		table td{padding:0 50px;text-align:center;}
+	</style>
+</head>
+<body>
+	<div id="app">
+
+	<p>学生录入系统</p>
+	<div class="formbox">
+		name : <input type="text" class="" v-model="perSubject.name"  /> <br>
+		age : <input type="text" class="" v-model="perSubject.age" /> <br>
+		sex : <select name="" id="" v-model="perSubject.sex"> <br>
+			<option value="男" selected>男</option>
+			<option value="女">女</option>
+		</select><br>
+		phone : <input type="tel" v-model="perSubject.phone"/> <br>
+		<button v-on:click="addDataClick">插入数据</button>
+	</div>
+
+	
+	<p>学生数据：</p>
+	<table border="1" cellpadding="0" cellspacing="0" align="center">
+		<tr>
+			<th>姓名</th>
+			<th>年龄</th>
+			<th>性别</th>
+			<th>电话</th>
+			<th>操作</th>
+		</tr>
+		<tr v-for="(item, index) in subjects">
+			<td>{{item.name}}</td>
+			<td>{{item.age}}</td>
+			<td>{{item.sex}}</td>
+			<td>{{item.phone}}</td>
+			<td><button v-on:click="removeClick(index)">删除</button></td>
+		</tr>
+	</table>
+	
+
+	<p>事件属性：</p>
+	<i>{{message}}</i>
+	<strong>{{reverseStr}}</strong>
+	
+
+	<p>属性计算：</p>
+	<p>名字: {{fullName}}</p>
+	<button v-on:click="clickChangeName">点击更换名字</button>
+</div>
+
+	<script type="text/javascript" src="js/vue.js"></script>	
+	<script type="text/javascript">
+		var vue = new Vue({
+			el: '#app',
+			data: {
+				message : '你好 world',
+				show : true,
+				hidden : false,
+				num : 3556,
+				score : 88,
+				lists : [88,80,90,99,102,36],
+				animals:[{name:'猫',age:3},{name:'狗',age:3},{name:'哈士奇',age:2}],
+				subjects:[
+						{name:'王小明',sex:'男',age:'16',phone:13300086882},
+						{name:'李宝',sex:'男',age:'16',phone:13300086556},
+						{name:'胡大华',sex:'男',age:'19',phone:13300226556},
+						{name:'小花',sex:'女',age:'11',phone:13526586556}
+					],
+				perSubject : {name:'',sex:'',age:'',phone:00000000000},
+				firstName : 'Wei',
+				lastName : 'Xiaobao'
+			},
+			methods: {
+				addDataClick : function(e){
+
+					//简单判断
+					if(!this.perSubject.name || !this.perSubject.sex || !this.perSubject.age || !this.perSubject.phone){
+						alert('内容不能为空!');
+						return;
+					}
+
+					this.subjects.unshift(this.perSubject);
+					this.perSubject =  {name:'',sex:'',age:'',phone:00000000000};
+				},
+				removeClick : function(index){
+					this.subjects.splice(index,1);
+				},
+				clickChangeName: function(){
+					this.fullName = 'Zhang Sanfeng';
+				}
+			},
+			computed: {
+				reverseStr: function(){
+					return this.message.split('').reverse().join('');
+				},
+				fullName : {
+					get: function(){
+						return this.firstName+this.lastName;
+					},
+					set : function(str){
+						var arr = str.split(' ');
+						this.firstName = arr[0];
+						this.lastName = arr[1];
+					}
+				}
+			}	
+		})
+	</script>
+
+	<script type="text/javascript">		
+		/*
+			vue指令: 
+			v-model  -> 数据绑定，时刻更新数据 
+			v-once   -> 单次绑定数据，不时刻更新刷新
+			v-if     -> 根据表达式( boolean )的真假来添加和删除元素 真实的条件渲染 把元素替换成 <!---->
+			v-show   -> 条件选择类似于v-if 但只是css的一个样式隐藏 给元素添加了display:none
+			v-else   -> 不能单独使用,前面紧挨着必须是 v-if 或者 v-else-if
+			v-for    -> 批量渲染列表数据 语法 v-for= "(item,index) in items "其级别高于v-if等条件语句
+			v-text   -> 往标签内部动态的注入text内容
+			v-html   -> 往标签内部动态的注入html内容
+			v-bind   -> 给标签动态的绑定属性 src alt data-x  ... ; 绑定一个类
+			v-on     -> 动态绑定事件 b-on:click="funcname"
+			computed -> 计算选项(适合改变频率比较低的数据计算) set get 操作
+		*/
+	</script>
+</body>
+</html>

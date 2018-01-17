@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	
+	<!--全局组件-->	
+
+	<div id="app">
+		<music></music>
+	</div>
+	
+
+	<template id="my-com">
+		
+		<div>
+			<p>月光曲 - 贝多芬</p>
+			<p>莫扎特 - 小提琴</p>
+		</div>
+		
+	</template>
+
+	<script type="text/javascript" src="js/vue.js"></script>		
+	<script type="text/javascript">
+
+			
+		Vue.component('music',{
+			template: '#my-com'
+		})
+
+		
+
+		let vm = new Vue({
+			el: '#app',
+			data: {
+				
+			}
+		});
+	</script>
+
+	<script type="text/javascript">		
+		/*
+			vue指令: 
+			v-model  		-> 数据绑定，时刻更新数据 
+			v-once   		-> 单次绑定数据，不时刻更新刷新
+			v-if     		-> 根据表达式( boolean )的真假来添加和删除元素 真实的条件渲染 把元素替换成 <!---->
+			v-show   		-> 条件选择类似于v-if 但只是css的一个样式隐藏 给元素添加了display:none
+			v-else   		-> 不能单独使用,前面紧挨着必须是 v-if 或者 v-else-if
+			v-for    		-> 批量渲染列表数据 语法 v-for= "(item,index) in items "其级别高于v-if等条件语句
+			v-text   		-> 往标签内部动态的注入text内容
+			v-html   		-> 往标签内部动态的注入html内容
+			v-bind   		-> 给标签动态的绑定属性 src alt data-x  ... ; 绑定一个类
+			v-on     		-> 动态绑定事件 b-on:click="funcname"
+			computed 		-> 计算选项(适合改变频率比较低的数据计算) set get 操作
+			全局组件	 		-> Vue.component( '组件名称' , 组件构造器 )	当前页面全局使用 
+			局部组件	 		-> components:{ '组件名称' : 组件构造器 } 只能在限定的元素内部使用
+			创建组件(other)	-> <template id="componentId"></template> < script type="text/template" id="componentId">< /script >
+		*/
+	</script>
+
+</body>
+</html>
