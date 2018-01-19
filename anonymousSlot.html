@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+	</style>
+</head>
+<body>
+	<!-- VUE 插槽 -->
+
+
+	<!-- VUE 匿名插槽 -->
+	
+	<div id="app">
+		<my-slot>
+			<img src="images/timg.jpg" width="200">
+			<p>这个菇凉好美滴</p>
+		</my-slot>
+	</div>
+
+
+	<template id="my_slot">
+		<div id="panel">
+			<h2 class="panel-header">插槽头部</h2>
+			<!--预留一个插槽-->
+			<slot>可以替换任意标签，默认显示提示的内容</slot>
+			<footer>插槽的尾部</footer>
+		</div>
+	</template>
+
+	<script type="text/javascript" src="./js/vue.js"></script>
+	<script type="text/javascript">
+		Vue.component('my-slot',{
+			template:'#my_slot'
+		})	
+
+		let vue = new Vue({
+			el:'#app',
+			data:{
+
+			}
+		})
+	</script>
+</body>
+</html>

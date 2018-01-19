@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+	</style>
+</head>
+<body>
+	<!-- VUE 插槽 -->
+
+
+	<!-- VUE 匿名插槽 -->
+	
+	<div id="app">
+		<my-computer>
+			<div slot="cpu">
+				<p>Inter Core i9</p>
+			</div>
+			<div slot="neicun">
+				<img src="./images/timg.jpg" width="200">
+			</div>
+			<div slot="display"> 22英寸 </div>
+			<div slot="disk"> 40G </div>
+			<div slot="audio"> 混音 </div>
+			<img src="./images/timg2.jpg" width="200">
+		</my-computer>
+	</div>
+
+
+	<template id="computer">
+		<div id="main">
+			<slot name="cpu">cpu插口</slot>
+			<slot name="neicun">内存条插口</slot>
+			<slot name="audio">音响插口</slot>
+			<slot name="display">显示屏插口</slot>
+			<slot name="disk">硬盘插口</slot>
+		</div>
+	</template>
+
+	<script type="text/javascript" src="./js/vue.js"></script>
+	<script type="text/javascript">
+		Vue.component('my-computer',{
+			template:'#computer'
+		})	
+
+		let vue = new Vue({
+			el:'#app',
+			data:{
+
+			}
+		})
+	</script>
+</body>
+</html> 
