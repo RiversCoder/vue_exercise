@@ -6,57 +6,53 @@
 </head>
 <body>
 	
-	<!--全局组件-->	
-
-	<div id="app">
-		<my-parent :imgs="img" :imgt="title"></my-parent>
-	</div>
+	<!--自定义事件-->	
 	
-	<template id="my_img">
-		<img :src="imagesrc" width="200">
-	</template>
+	<div id="app">
+		<my-btn v-on:countAdd="allcount()"></my-btn>
+		<my-btn v-on:countAdd="allcount()"></my-btn>
+		<my-btn v-on:countAdd="allcount()"></my-btn>
+		<my-btn v-on:countAdd="allcount()"></my-btn>
+		<my-btn v-on:countAdd="allcount()"></my-btn>
 
-	<template id="my_title">
-		<h3>{{title}}</h3>
-	</template>
+		<p>总共点击了 {{totalCount}} 次</p>
+	</div>
 
-	<template id="my_parent">
-		<div>
-			<child1 :imagesrc="imgs"></child1>
-			<child2 :title="imgt"></child2>
-		</div>
+	<template id="my_btn">
+		<button v-on:click="countadd">点击了{{count}}次</button>
 	</template>
+		
+	
 
 	<script type="text/javascript" src="js/vue.js"></script>		
 	<script type="text/javascript">
 
-		// 子组件的实例
-		let childImg = Vue.extend({
-			template:'#my_img',
-			props:['imagesrc']
-		});
+		Vue.component('my-btn',{
+			template : '#my_btn',
+			data: function(){
+				return {
+					count : 0
+				}
+			},
+			methods:{
+				countadd : function(){
+					this.count++;
 
-		let childTitle = Vue.extend({
-			template:'#my_title',
-			props:['title']
-		});
-
-
-		//注册父组件
-		Vue.component('my-parent',{
-			template:'#my_parent',
-			props:['imgs','imgt'],
-			components:{
-				'child1':childImg,
-				'child2':childTitle
+					//通知外界触发了这个方法
+					this.$emit('countadd');
+				}
 			}
-		})
-
+		});
+		
 		let vm = new Vue({
 			el: '#app',
 			data: {
-				title: '我是不是很漂亮',
-				img: 'images/timg.jpg'
+				totalCount:0
+			},
+			methods:{
+				allcount:function(){
+					this.totalCount++;
+				}
 			}
 		});
 	</script>
@@ -79,6 +75,7 @@
 			局部组件	 -> components:{ '组件名称' : 组件构造器 } 只能在限定的元素内部使用
 			组件通信	 -> props 
 			多层组件通信 -> props 
+			自定义事件 -> 通过绑定执行的函数作为时间名，再次在父组件中监听
 		*/
 	</script>
 
