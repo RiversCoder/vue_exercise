@@ -27,9 +27,9 @@
 			<div class="col-xs-2 col-xs-offset-2">
 				<div class="list-group">
 					<!-- 入口 -->
-					<router-link to="/h5" class="list-group-item">h5</router-link>
-					<router-link to="/java" class="list-group-item">java</router-link>
-					<router-link to="/python" class="list-group-item">python</router-link>		
+					<router-link :to="{name:'h5'}" class="list-group-item">h5</router-link>
+					<router-link :to="{name:'java'}" class="list-group-item">java</router-link>
+					<router-link :to="{name:'python'}" class="list-group-item">python</router-link>		
 				</div>
 			</div>
 			<div class="col-xs-6">
@@ -41,6 +41,8 @@
 				</div>
 			</div>
 		</div>
+
+		
 	</div>
 
 
@@ -48,15 +50,46 @@
 
 
 
-	<!-- // templates -->
+	<!--  // templates  -->
 
 	<template id="h5">
 		<div>
 			<h2>html5学院</h2>
 			<p>html5相关的介绍信息</p>
 			<img src="./images/timg.jpg" width="180" />
+
+			<div class="link">
+				<ul class="nav nav-tabs">
+					<router-link to="/h5/basic" >H5 基础班</router-link>
+					<router-link to="/h5/big" >H5 大神班</router-link>
+				</ul>
+			</div>
+
+			<div class="tab-content">
+				<router-view></router-view>
+			</div>
+		</div>
+
+		
+
+	</template>
+
+	<template id="h5_basic">
+		<div>
+			<h3>html5学院 基础班</h3>
+			<p>html5 基础班相关的介绍信息</p>
+			<img src="./images/timg4.jpg" width="130" />
 		</div>
 	</template>
+
+	<template id="h5_big">
+		<div>
+			<h3>html5学院 大神班</h3>
+			<p>html5 大神班相关的介绍信息</p>
+			<img src="./images/timg5.jpg" width="130" />
+		</div>
+	</template>
+
 
 	<template id="java">
 		<div>
@@ -85,6 +118,14 @@
 			template:'#h5'
 		});
 
+		const Html5_Basic = Vue.extend({
+			template:'#h5_basic'
+		});
+
+		const Html5_Big = Vue.extend({
+			template:'#h5_big'
+		});
+
 		const Java = Vue.extend({
 			template:'#java'
 		});
@@ -93,15 +134,26 @@
 			template:'#python'
 		});
 
+		//定义h5子路由
+		const h5s = [
+			{path:'basic',component:Html5_Basic},
+			{path:'big',component:Html5_Big},
+
+			/* 配置子路由 */	
+			{path:'/',redirect:'basic'}
+		];
+
 		//2. 定义路由
 		const routes = [
-			{path:'/h5',component:Html5},
-			{path:'/java',component:Java},
-			{path:'/python',component:Python},
+			{path:'/h5',component:Html5,children:h5s,name:'h5'},
+			{path:'/java',component:Java,name:'java'},
+			{path:'/python',component:Python,name:'python'},
 
 			/* 配置根路由 */
 			{path:'/',redirect:'/h5'}
 		];
+
+		
 
 		//3. 创建路由实例
 		const router = new VueRouter({
